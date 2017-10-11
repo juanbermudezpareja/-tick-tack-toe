@@ -1,11 +1,9 @@
 var tablero = [[null, null, null], [null, null, null], [null, null, null]];
 
-leerTablero(tablero);
-
 function assignX(e, posX, poxY) {
     tablero[posX][poxY] = 'X';
     e.target.innerText = 'X';
-    if (leerTablero(tablero, 'X')===false){
+    if (leerTablero(tablero, 'X')===false && anyBoxNotFilled()){
         juegaPC();
     }
 }
