@@ -12,9 +12,10 @@ var tablero = [[null, null, null], [null, null, null], [null, null, null]];
 
 leerTablero(tablero);
 
-function assignX(posX,poxY){
+function assignX(e,posX,poxY){
     tablero[posX][poxY]='X';
-    leerTablero(tablero);
+    leerTablero(tablero);   
+    e.target.innerText='X';
 }
 
 function leerTablero(tablero) {
