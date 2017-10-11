@@ -1,6 +1,7 @@
 body {
 	width: 300px;
 	margin: 0 auto;
+	background-color: grey;
 }
 .span{
   min-height: 100px;
