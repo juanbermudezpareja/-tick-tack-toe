@@ -1,0 +1,23 @@
+{
+  "name": "ticktack",
+  "version": "1.0.0",
+  "description": "Famous game named  tick-tack-toe.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juanbermudezpareja/-tick-tack-toe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juanbermudezpareja/-tick-tack-toe/issues"
+  },
+  "homepage": "https://github.com/juanbermudezpareja/-tick-tack-toe#readme",
+  "devDependencies": {
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-connect": "^5.0.0"
+  }
+}

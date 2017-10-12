@@ -1,24 +1,28 @@
-var tablero = [[null, null, null], [null, null, null], [null, null, null]];
 
-function assignX(e, posX, poxY) {
-    tablero[posX][poxY] = 'X';
+// Global matrix where every position represents a box
+var panel = [[null, null, null], [null, null, null], [null, null, null]];
+
+// X is displayed in the box in the position x and y
+function playPlayer(e, posX, poxY) {
+    panel[posX][poxY] = 'X';
     e.target.innerText = 'X';
-    if (leerTablero(tablero, 'X')===false && anyBoxNotFilled()){
-        juegaPC();
+    if (readPanel('X')===false && anyBoxNotFilled()){
+        playComputer();
     }
 }
 
-function juegaPC() {
+// O is displayed in a random position
+function playComputer() {
     let x;
     let y;
     do {
         x = getRandomInt(0,3);
         y = getRandomInt(0,3);
-    } while (tablero[x][y] !== null)
+    } while (panel[x][y] !== null)
     
     const divPC = 'div_' + x + y;
-    tablero[x][y] = 'O';
-    leerTablero(tablero, 'O');
+    panel[x][y] = 'O';
+    readPanel('O');
 
     document.getElementById(divPC).innerText = 'O';
 }
@@ -27,38 +31,37 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function leerTablero(tablero, jugador) {
-    if (tablero[0][0] != null && tablero[0][0] == tablero[0][1] && tablero[0][1] == tablero[0][2]) {
-        return displayInlineWiner(jugador);
-    } else if (tablero[0][0] != null && tablero[0][0] == tablero[1][0] && tablero[1][0] == tablero[2][0]) {
-        return displayInlineWiner(jugador);
-    } else if (tablero[0][1] != null && tablero[0][1] == tablero[1][1] && tablero[1][1] == tablero[2][1]) {
-        return displayInlineWiner(jugador);
-    } else if (tablero[0][2] != null && tablero[0][2] == tablero[1][2] && tablero[1][2] == tablero[2][2]) {
-        return displayInlineWiner(jugador);
-    } else if (tablero[0][0] != null && tablero[0][0] == tablero[1][1] && tablero[1][1] == tablero[2][2]) {
-        return displayInlineWiner(jugador);
-    } else if (tablero[0][2] != null && tablero[0][2] == tablero[1][2] && tablero[1][2] == tablero[2][0]) {
-        return displayInlineWiner(jugador);
-    } else if (tablero[1][0] != null && tablero[1][0] == tablero[1][1] && tablero[1][1] == tablero[1][2]) {
-        return displayInlineWiner(jugador);
-    } else if (tablero[2][0] != null && tablero[2][0] == tablero[2][1] && tablero[2][1] == tablero[2][2]) {
-        return displayInlineWiner(jugador);
+function readPanel(player) {
+    if (panel[0][0] !== null && panel[0][0] === panel[0][1] && panel[0][1] === panel[0][2]) {
+        return displayInlineWiner(player);
+    } else if (panel[0][0] !== null && panel[0][0] === panel[1][0] && panel[1][0] === panel[2][0]) {
+        return displayInlineWiner(player);
+    } else if (panel[0][1] !== null && panel[0][1] === panel[1][1] && panel[1][1] === panel[2][1]) {
+        return displayInlineWiner(player);
+    } else if (panel[0][2] !== null && panel[0][2] === panel[1][2] && panel[1][2] === panel[2][2]) {
+        return displayInlineWiner(player);
+    } else if (panel[0][0] !== null && panel[0][0] === panel[1][1] && panel[1][1] === panel[2][2]) {
+        return displayInlineWiner(player);
+    } else if (panel[0][2] !== null && panel[0][2] === panel[1][2] && panel[1][2] === panel[2][0]) {
+        return displayInlineWiner(player);
+    } else if (panel[1][0] !== null && panel[1][0] === panel[1][1] && panel[1][1] === panel[1][2]) {
+        return displayInlineWiner(player);
+    } else if (panel[2][0] !== null && panel[2][0] === panel[2][1] && panel[2][1] === panel[2][2]) {
+        return displayInlineWiner(player);
     } else {
         return false;
     }
 }
 
 function displayInlineWiner(player) {
-    const winer = 'win' + player;
-    document.getElementById(winer).style.display = 'inline';
-    console.log("3 en raya para el jugador " + player);
+    document.getElementById('winner').innerText = 'Player: ' + player + ' wins.';
+    console.log("Winner: " + player);
 }
 
 function anyBoxNotFilled(){
     for (var i = 0; i < 3; i++) {
         for (var j = 0; j < 3; j++) {
-            var element = tablero[i][j];
+            const element = panel[i][j];
             if (element === null){
                 return true;
             }
